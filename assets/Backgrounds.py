@@ -2,59 +2,68 @@ BACKGROUNDS = {
   'grass':{
     'tileset':'assets/Tilesets/World_Tileset.png',
 
-    "TL" :{
+    'ff0000' :{
       'left'  :6,
       'top'   :208,
       'width' :21,
-      'height':21
+      'height':21,
+      'description': 'TL'
     },
-    "TM" :{
+    'ff9800' :{
       'left'  :14,
       'top'   :208,
       'width' :21,
-      'height':21
+      'height':21,
+      'description': 'TM'
     },
-    "TR" :{
+    '20ff00' :{
       'left'  :25,
       'top'   :208,
       'width' :21,
-      'height':21
+      'height':21,
+      'description': 'TR'
     },
-    "ML" :{
+    'ff5400' :{
       'left'  :6,
       'top'   :222,
       'width' :21,
-      'height':21
+      'height':21,
+      'description': 'ML'
     },
-    "MM" :{
+    'fff200' :{
       'left'  :14,
       'top'   :222,
       'width' :21,
-      'height':21
+      'height': 21,
+      'description': 'MM'
     },
-    "MR" :{
+    '00ff5c' :{
       'left'  :25,
       'top'   :222,
       'width' :21,
-      'height':21
+      'height':21,
+      'description': 'MR'
     },
-    "BL" :{
+    'ff6b00' :{
       'left'  :6,
       'top'   :236,
       'width' :21,
-      'height':21
+      'height':21,
+      'description': 'BL'
     },
-    "BM" :{
+    'a7ff00' :{
       'left'  :14,
       'top'   :236,
       'width' :21,
-      'height':21
+      'height':21,
+      'description': 'BM'
     },
-    "BR" :{
+    '00ffcc' :{
       'left'  :25,
       'top'   :236,
       'width' :21,
-      'height':21
+      'height':21,
+      'description': 'BR'
     },
      "OR" :{
       'left'  :17,

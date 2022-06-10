@@ -51,9 +51,9 @@ class Player(pygame.sprite.Sprite):
       self.animation_state = 'walk_down'
       self.moving = True
     
-    self.acc.x += self.vel.x * FRIC
-    self.acc.y += self.vel.y * FRIC
-    self.vel += self.acc
+    self.acc.x += self.vel.x * FRIC 
+    self.acc.y += self.vel.y * FRIC 
+    self.vel += self.acc 
     self.pos += self.vel + 0.5 * self.acc
 
     if self.pos.x < 0:

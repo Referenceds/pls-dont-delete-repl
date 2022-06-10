@@ -1,41 +1,36 @@
+
 from config import *
 from objects.player import Player
-from objects.tile import Background as Bg
-
+from objects.tile import Background as Bg 
+from objects.tile import load_map
+from objects.border import Border
 pygame.init()
 displaySurface = pygame.display.set_mode((WIDTH, HEIGHT))
 FramePerTick = pygame.time.Clock()
 
 P1 = Player()
-
-
+camera = {
+  "x" : 0,
+  "y" : 0
+}
+border = Border()
 all_sprites = pygame.sprite.Group()
 all_sprites.add(P1)
-all_tiles = pygame.sprite.Group()
+all_sprites.add(border)
+all_tiles = {}
 
-map = [
-  
-  ['OR','OR','OR','OR','OR'],
-  ['OR','OR','OR','OR','OR'],
-  ['OR','OR','OR','OR','OR'],
-  ['OR','OR','OR','OR','OR'],
-  ['OR','TL','TM','TR','OR'],
-  ['OR','ML','MM','MR','OR'],
-  ['OR','ML','MM','MR','OR'],
-  ['OR','BL','BM','BR','OR'],
-  ['OR','OR','OR','OR','OR'],
-  ['OR','OR','OR','OR','OR'],
 
-]
-x = 200
-y = 0
+# 24 x 24
+map = load_map("assets/Maps/TestMap.png")
+#print("...starting build map...")
 for r in map:
+  #print(r)
   for c in r:  
-    tile = Bg('grassy',c,(x,y))
-    all_tiles.add(tile)
-    x += 22
-  y += 22
-  x = 200
+   #print(c)
+    if not c in all_tiles.keys():
+      tile = Bg('grass',c,(0,0))
+      all_tiles.update({c:tile})
+#print("...finished build map...")
 
 
 
@@ -47,9 +42,25 @@ while True:
 
     displaySurface.fill((0, 0, 0))
 
-    for tile in all_tiles:
-        tile.update()
-        displaySurface.blit(tile.surf, tile.rect)
+    x = camera["x"]
+    y = camera["y"]
+    for r in map:
+      if y < 0 or y > HEIGHT:
+        x = camera["x"]
+        y += 21
+        continue
+      else:      
+        for p in r:
+          if x < 0 or x > WIDTH:
+            x += 21
+            continue
+          else:
+            bg = all_tiles[p]
+            bg.rect.center = (x,y)
+            displaySurface.blit(bg.surf, bg.rect)
+            x += 21
+        x = camera["x"]
+        y += 21
 
     for spr in all_sprites:
         spr.move()
@@ -57,11 +68,16 @@ while True:
         displaySurface.blit(spr.surf, spr.rect)
     if P1.pos.x < 120:
       P1.pos.x += abs(P1.vel.x)
+      camera["x"] += abs(P1.vel.x)
     if P1.pos.x > WIDTH - 120:
       P1.pos.x -= abs(P1.vel.x)
+      camera["x"] -= abs(P1.vel.x)
     if P1.pos.y < 120:
       P1.pos.y += abs(P1.vel.y)
+      camera["y"] += abs(P1.vel.y)
     if P1.pos.y > HEIGHT - 120:
       P1.pos.y -= abs(P1.vel.y)
+      camera["y"] -= abs(P1.vel.y)
     pygame.display.update()
     FramePerTick.tick(FPS)
+    print(f'camera.x: {camera["x"]} , camera.y: {camera["y"]}')

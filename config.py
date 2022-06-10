@@ -6,5 +6,5 @@ vec = pygame.math.Vector2
 WIDTH = 500
 HEIGHT = 500
 ACC = 0.5
-FRIC = -0.25
+FRIC = -0.5
 FPS = 60
