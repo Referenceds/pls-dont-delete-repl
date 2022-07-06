@@ -1,4 +1,4 @@
-#from combat.battle import *
+from combat.battle import *
 from config import *
 from objects.player import Player
 from objects.tile import Background as Bg 
@@ -41,50 +41,44 @@ while True:
             sys.exit()
         if event.type == KEYDOWN:
           if event.key == K_a:
-            battle = not battle
+            combatLoop(displaySurface)
     displaySurface.fill((0, 0, 0))  
-    if battle:
-      #f = pygame.font.SysFont("Times",16)
-      #g = f.render("COMBAT",True,(255,255,255)) 
-      #displaySurface.blit(g,(50,50,50,50))
-      pass
-    else:
-      x = camera["x"]
-      y = camera["y"]
-      for r in map:
-        if y < 0 or y > HEIGHT:
-          x = camera["x"]
-          y += 21
-          continue
-        else:      
-          for p in r:
-            if x < 0 or x > WIDTH:
-              x += 21
-              continue
-            else:
-              bg = all_tiles[p]
-              bg.rect.center = (x,y)
-              displaySurface.blit(bg.surf, bg.rect)
-              x += 21
-          x = camera["x"]
-          y += 21
-  
-      for spr in all_sprites:
-          spr.move()
-          spr.update()
-          displaySurface.blit(spr.surf, spr.rect)
-      if P1.pos.x < 120:
-        P1.pos.x += abs(P1.vel.x)
-        camera["x"] += abs(P1.vel.x)
-      if P1.pos.x > WIDTH - 120:
-        P1.pos.x -= abs(P1.vel.x)
-        camera["x"] -= abs(P1.vel.x)
-      if P1.pos.y < 120:
-        P1.pos.y += abs(P1.vel.y)
-        camera["y"] += abs(P1.vel.y)
-      if P1.pos.y > HEIGHT - 120:
-        P1.pos.y -= abs(P1.vel.y)
-        camera["y"] -= abs(P1.vel.y)
-      pygame.display.update()
-      FramePerTick.tick(FPS)
+    x = camera["x"]
+    y = camera["y"]
+    for r in map:
+      if y < 0 or y > HEIGHT:
+        x = camera["x"]
+        y += 21
+        continue
+      else:      
+        for p in r:
+          if x < 0 or x > WIDTH:
+            x += 21
+            continue
+          else:
+            bg = all_tiles[p]
+            bg.rect.center = (x,y)
+            displaySurface.blit(bg.surf, bg.rect)
+            x += 21
+        x = camera["x"]
+        y += 21
+
+    for spr in all_sprites:
+        spr.move()
+        spr.update()
+        displaySurface.blit(spr.surf, spr.rect)
+    if P1.pos.x < 120:
+      P1.pos.x += abs(P1.vel.x)
+      camera["x"] += abs(P1.vel.x)
+    if P1.pos.x > WIDTH - 120:
+      P1.pos.x -= abs(P1.vel.x)
+      camera["x"] -= abs(P1.vel.x)
+    if P1.pos.y < 120:
+      P1.pos.y += abs(P1.vel.y)
+      camera["y"] += abs(P1.vel.y)
+    if P1.pos.y > HEIGHT - 120:
+      P1.pos.y -= abs(P1.vel.y)
+      camera["y"] -= abs(P1.vel.y)
+    pygame.display.update()
+    FramePerTick.tick(FPS)
     print(f"battle:{battle}")
